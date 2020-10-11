@@ -1,0 +1,66 @@
+<h2>Main Dashboard</h2><hr>
+<h5 style="color:blue;">Client Entry</h5><br>
+<%= render 'form' %>
+<br><br><br>
+
+
+
+<h5 style="color:blue;">Client Filter</h5><br>
+<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+   <div class="form-group">
+    
+       <%= f.input :name_or_client_category_or_client_type, input_html: {value: ""} %>  
+    </div> 
+  
+  <%= f.submit "query", class: "btn btn-default btn-sm", :id=>"search_btn" %>
+
+
+<% end %>
+
+
+
+<br>
+<table class="table table-bordered" style="font-size: 10px;">
+
+
+  <thead>
+    <tr>
+      <th>Client ID</th>
+      <th>Name</th>
+      <th>D.O.B</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Company</th>
+      <th>Category</th>
+      <th>Type</th>
+      <th>Notes</th>
+      <th>Editing </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.client_reg_id %></td>
+        <td><%= client.name %></td>
+        <td><%= client.dateofbirth %></td>
+        <td><%= client.gender %></td>
+        <td><%= client.email %></td>
+        <td><%= client.phone %></td>
+        <td><%= client.address %></td>     
+        <td><%= client.company %></td>
+        <td><%= client.client_category %></td>
+        <td><%= client.client_type %></td>
+        <td><%= client.additional_note %></td>
+        <td><%= link_to 'Edit', edit_client_path(client) %>
+         <%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
