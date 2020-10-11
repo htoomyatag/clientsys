@@ -10,8 +10,7 @@ class ClientsController < ApplicationController
     @search = params["search"]  #for search query
     if @search.present?  #if data in search query
       @name = @search["name_or_client_category"] #it will search with name category type
-      @clients = Client.where("name LIKE (?)", "%#{@name}%")
-    .or(Client.where(client_category: @name)).or(Client.where(client_type: @name))
+      @clients = Client.where("name LIKE (?)", "%#{@name}%").or(Client.where(client_category: @name)).or(Client.where(client_type: @name))
     end
   end
 
